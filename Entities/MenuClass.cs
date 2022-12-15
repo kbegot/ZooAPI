@@ -7,7 +7,6 @@ public class Menu
     
 
     // Relations
-    public List<Meal>? Meals{get; set;} 
 
     public virtual ICollection<MenuFood>? MenuFoods {get; set;}
 

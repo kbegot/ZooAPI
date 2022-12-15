@@ -10,6 +10,5 @@ public class Provider
     public string? ProviderSiret {get; set;}
 
     // Relation
-    public List<Food>? Foods{get; set;} 
 
 }

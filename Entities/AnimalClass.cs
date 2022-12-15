@@ -7,6 +7,5 @@ public class Animal
     public DateTime dateBirth {get; set;}
 
     //relation
-    public List<Meal>? Meals{get; set;} 
 
 }

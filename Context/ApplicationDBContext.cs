@@ -20,10 +20,10 @@ namespace ZooAPI.Context
         {
 
 
-            modelBuilder.Entity<ZooAPI.Entities.Food>()
-                .HasOne(f => f.Provider)
-                .WithMany(p => p.Foods)
-                .HasForeignKey(f => f.ProviderId);
+        //     modelBuilder.Entity<ZooAPI.Entities.Food>()
+        //         .HasOne(f => f.Provider)
+        //         .WithMany(p => p.Foods)
+        //         .HasForeignKey(f => f.ProviderId);
 
             modelBuilder.Entity<ZooAPI.Entities.MenuFood>()
                 .HasKey(mf => new {mf.FoodId, mf.MenuId});

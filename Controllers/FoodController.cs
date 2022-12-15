@@ -40,18 +40,42 @@ public class FoodController : ControllerBase
                 ProviderId = requestDTO.ProviderId
             };
 
-            // Ajouter l'animal au contexte de la base de données
+            var provider = await _context.Providers.FindAsync(requestDTO.ProviderId);
+            if (provider == null)
+            {
+                return BadRequest("Provider non trouvé");
+            }
+
+            // Ajouter food au contexte de la base de données
             await _context.Foods.AddAsync(food);
             
             // Sauvegarder les changements dans la base de données
             await _context.SaveChangesAsync();
 
-            // Retourner l'animal avec l'ID généré par la base de données
+            // Retourner food avec l'ID généré par la base de données
             return CreatedAtAction(nameof(CreateFood), new { id = food.FoodId }, food);
         }
         catch(Exception ex){
             return BadRequest(ex.Message);
         }
+    }
+
+    [HttpDelete]
+    [Route("/DeleteFood/{id}")]
+    public async Task<ActionResult<Food>> DeleteFood(int id)
+    {
+
+        //Récupération Food via l'id dans l'url
+        var food = await _context.Foods.FindAsync(id);
+
+        if (food == null)
+        {
+            return NotFound("Food not Found");
+        }
+        _context.Remove(food);
+
+        await _context.SaveChangesAsync();
+        return Ok(food.FoodId + " Food has been deleted !");
     }
 
 }
