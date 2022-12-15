@@ -29,6 +29,19 @@ public class MenuController : ControllerBase
         }
     }
 
+    [HttpGet]
+    [Route("GetMenu/{id}")]
+    public async Task<IActionResult> GetMenu(int id)
+    {
+        try{
+            return Ok(await _context.Menus.FindAsync(id));
+        }
+        catch(Exception ex)
+        {
+            return BadRequest(ex.Message);
+        }
+    }
+
     [HttpPost]
     [Route("CreateMenu")]
     public async Task<ActionResult<Menu>> CreateMenu([FromBody] MenuRequestDTO requestDTO)

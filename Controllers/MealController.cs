@@ -29,6 +29,19 @@ public class MealController : ControllerBase
         }
     }
 
+    [HttpGet]
+    [Route("GetMeal/{id}")]
+    public async Task<IActionResult> GetMeal(int id)
+    {
+        try{
+            return Ok(await _context.Meals.FindAsync(id));
+        }
+        catch(Exception ex)
+        {
+            return BadRequest(ex.Message);
+        }
+    }
+
     [HttpPost]
     [Route("CreateMeal")]
     public async Task<ActionResult<Meal>> CreateMeal([FromBody] MealRequestDTO requestDTO)
